@@ -1,0 +1,16 @@
+<%= content_tag :div, class: "widget widget-reviews pagination-list #{'no-data' if @reviews.total_count == 0}" do %>
+  <ul class="header">
+    <li>
+      <div class="col index">no</div>
+      <div class="col photo">photo</div>
+      <div class="col title">title</div>
+      <div class="col author">name</div>
+    </li>
+  </ul>
+  <ul class="reviews reviews-product">
+    <%= render partial: 'products/review', collection: @reviews, as: :review %>
+  </ul>
+  <div class="widget-footer">
+    <%= paginate @reviews, params: {review_id: nil}, remote: true, window: kaminari_window(params[:page].to_i, @reviews.total_pages) %>
+  </div>
+<% end %>
